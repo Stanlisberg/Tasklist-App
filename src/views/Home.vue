@@ -29,7 +29,7 @@ export default {
 
 .wrapper {
   max-width: 700px;
-  margin: 50px auto;
+  margin: 45px auto;
   border: 1px solid blue;
   padding: 0 15px;
 }
@@ -60,5 +60,14 @@ export default {
 .add {
   margin-right: 5px;
   font-weight: bold;
+}
+
+@media(width <= 605px) {
+ .first-row .head {
+    line-height: 1;
+ }
+ .first-row button {
+  padding: 10px 25px;
+ }
 }
 </style>
