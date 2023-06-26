@@ -1,12 +1,12 @@
 <template>
-  <Home />
+  <Data />
 </template>
 
 <script>
-import Home from './views/Home.vue'
+import Data from './components/Data.vue'
 
 export default {
-  components: { Home },
+  components: { Data },
   setup() {
 
   }
