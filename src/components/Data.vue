@@ -6,7 +6,7 @@
         <button @click="displayUpdateModal"><span class="add">+</span> Add Task</button>
       </div>
       <div class="second-row">
-        <div v-for="task in taskInfo" :key="task" class="card" ref='taskRef'>
+        <div v-for="task in taskInfo" :key="task" class="card">
           <div v-if="showModal" class="modal-background">
             <div class="modal">
               <div class="modal-wrapper">
@@ -93,13 +93,12 @@
           </div>
           <div class="second-col">
             <p class="para-up">Priority</p>
-            <p ref = 'textRef' :class='handleLevel()'>{{ task.level }}</p>
+            <p :class='handleLevel(task)'>{{ task.level }}</p>
           </div>
           <!-- </div> -->
 
           <!-- <div>  -->
-          <button ref="buttonRef" :class="changeProgress(task)" @click="changeProgressButton(task)">
-            {{ progressButton }}
+          <button ref="buttonRef" :class='changeProgress(task)' @click="changeProgressButton(task.label)">{{ progressButton }}
           </button>
           <font-awesome-icon
             icon="fa-regular fa-pen-to-square"
@@ -124,7 +123,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 export default {
   setup() {
     const showModal = ref(false)
@@ -137,18 +136,16 @@ export default {
     const editValue = ref()
     const addUpdateRef = ref()
     const addRef= ref()
-    const buttonRef = ref(null)
     const removeRef = ref(false)
     const progressButton = ref()
     const handleButtonRef = ref()
     const paraRef = ref(null)
-    const taskRef = ref(null)
-    const textRef = ref(null)
+    const buttonRef = ref(null)
+    const buttonValue = ref()
 
-    const myButton = paraRef
-    const myTask = taskRef
-    const myText = textRef
     
+
+    const myButton = buttonRef;
    
     const doThis = () => {
       if(taskToEdit.value.level = 'High') {
@@ -163,8 +160,8 @@ export default {
       { title: 'Do house chores', level: 'High', id: '4', label: ['To Do', 'In Progress', 'Done'] },
       {
         title: 'Publish an article',
-        level: 'Medium',
-        id: '5',
+        level: 'Low',
+        id: '5', 
         label: ['To Do', 'In Progress', 'Done']
       }
     ])
@@ -195,7 +192,7 @@ export default {
       }
     }
 
-    // -----individual button active & handle active button------
+    //------individual button active & handle active button------
 
     const handleActiveButton = (id) => {
       activeButton.value = id
@@ -293,52 +290,51 @@ export default {
 
     //---------Change Progress----------
     const changeProgress = (task) => {
-      progressButton.value = task.label[0]
-
-      // console.log( progressButton.value)
+      progressButton.value = task.label[2] 
     }
 
+    // buttonValue.value = 'To Do'
     const changeProgressButton = (task) => {
-      // if (buttonRef.value == buttonRef.value[0]) {
-      //   console.log('hey')
-      // }
-      //  if(task.level === 'High') {
-         console.log(myTask.value)
-      //  }
-      
+     
+      const testing = task.filter(data => {
+        if(progressButton.value === 'To Do') {
+          return data === 'In Progress';
+        } else if(progressButton.value === 'In Progress') {
+           return data === 'Done'
+        } else if(progressButton.value === 'Done') {
+           return data === 'To Do'
+        }
+       }).map(item => {
+        // return item 
+        console.log(item)
+         return progressButton.value = item
+       })
+
+      //  console.log(progressButton.value)
+
     }
 
     //--------- Level Test cholor-----------
-    const handleLevel = ()  => {
-      myText.value?.map(data => {
-
-        console.log(data.innerHTML);
-        // console.log(data.textContent)
-  
-        // if(data.textContent === 'High') {
-          // return 'high-red'
-        //   console.log('hey') 
-        // }
-        // } else if(data.textContent === 'Medium') {
-        //   return 'medium-yellow' 
-        // } else if(data.textContent === 'Low') {
-        //   return 'low-green'
-        // }
-      })
+    const handleLevel = (task)  => {
+        if(task.level === 'High') {
+          return 'high-red'
+        } else if(task.level === 'Medium') {
+          return 'medium-yellow'
+        } else if(task.level === 'Low') {
+          return 'low-green'
+        }
 
     }
 
     return {
       taskInfo,
       displayModal,
-      buttonRef,
       handleButtonRef,
       paraRef,
       doThis,
-      taskRef, 
-      textRef,
-      // breakPara,
-      // btnRef1,
+      buttonRef, 
+      buttonValue,
+      // progressValue,
       changeProgress,
       handleLevel,
       changeProgressButton,
