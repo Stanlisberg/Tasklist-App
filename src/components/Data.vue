@@ -47,7 +47,7 @@
                 <button @click="handleActiveButton(3)" :class="lowActive()">Low</button>
               </div>
               <div class="add-button-div">
-                <button @click="addTask" ref="addUpdateRef" :class="disableAdd()">Add</button>
+                <button @click="addTask" ref="addUpdateRef" :class="disableAdd()"  id='add-button-id'>Add</button>
               </div>
             </div>
           </div>
@@ -80,13 +80,13 @@
                 <button @click="handleActiveButton(3)" :class="lowActive()">Low</button>
               </div>
               <div class="add-button-div">
-                <button @click="editTask" ref="addUpdateRef" class="add-button">Edit</button>
+                <button @click="editTask" ref="addUpdateRef" class="add-button" id='add-button-id'>Edit</button>
               </div>
             </div>
           </div>
 
-          <!-- <div class='card-wrapper'>
-          <div> -->
+        <!-- <div class='hey'> -->
+         <div class='card-wrapper'>
           <div class="first-col">
             <p class="para-up">Task</p>
             <p class="para-title">{{ task.title }}</p>
@@ -95,16 +95,16 @@
             <p class="para-up">Priority</p>
             <p :class='handleLevel(task)'>{{ task.level }}</p>
           </div>
-          <!-- </div> -->
+         </div>
+        
 
-          <!-- <div>  -->
-          <button ref="buttonRef" :class='changeProgress(task)' @click="changeProgressButton(task.label)">{{ progressButton }}
+          <button ref="buttonRef" id='progress-button' :class='changeProgress(task)' @click="changeProgressButton(task.label)">{{ progressButton }}
           </button>
           <font-awesome-icon
             icon="fa-regular fa-pen-to-square"
             size="xl"
             color="rgb(10, 22, 41)"
-            class="logo"
+            class="logo logo1"
             @click="showEditModal(task)"
           />
           <font-awesome-icon
@@ -112,10 +112,9 @@
             size="xl"
             color="crimson"
             @click="showDeleteModal(task)"
-            class="logo"
+            class="logo logo2"
           />
-          <!-- </div> -->
-          <!-- </div> -->
+
         </div>
       </div>
     </div>
@@ -376,8 +375,7 @@ export default {
 
 .wrapper {
   max-width: 700px;
-  margin: 45px auto;
-  border: 1px solid blue;
+  margin: 30px auto;
   padding: 0 15px;
 }
 
@@ -431,7 +429,7 @@ export default {
 
 .card-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
 }
 
@@ -443,9 +441,8 @@ export default {
   color: #91929e;
 }
 .para-title {
-  width: 140px;
+  width: 220px;
   font-size: 17px;
-  border: 1px solid red;
 }
 
 .high-red {
@@ -477,11 +474,26 @@ button {
   cursor: pointer;
 }
 
-@media (width <= 350px) {
+@media (width <= 600px) {
   .para-title {
-    width: 100px;
+    width: 160px;
     font-size: 16px;
-    border: 1px solid red;
+  }
+
+  .card {
+    display:block;
+  }
+
+  #progress-button {
+    margin-top: 50px;
+  }
+
+  .logo2 {
+   margin-left: 8%;
+  }
+
+  .logo1 {
+     margin-left: 8%;
   }
 }
 
@@ -568,7 +580,7 @@ button {
 }
 
 .update-modal {
-  padding: 30px 55px;
+  padding: 30px 50px;
   background-color: #fff;
   border-radius: 24px;
   width: 40%;
@@ -699,6 +711,24 @@ button {
   font-weight: 600;
 }
 
+@media (width <= 605px) {
+  .update-modal {
+    width: 92%;
+    margin: -50px auto 0 auto;
+  }
+
+  .update-third button {
+    padding: 13px 0 13px 0;
+    width: 28%;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  #add-button-id {
+      width: 35%;
+  }
+}
+
 /*-------Edit modal------------*/
 .edit-background {
   background: rgba(0, 0, 0, 0.2);
@@ -713,12 +743,19 @@ button {
 }
 
 .edit-modal {
-  padding: 30px 55px;
+  padding: 30px 50px;
   background-color: #fff;
   border-radius: 24px;
   width: 40%;
   justify-content: center;
   border: 1px solid blue;
   line-height: 2;
+}
+
+@media (width <= 605px) {
+  .edit-modal {
+    width: 92%;
+    margin: -50px auto 0 auto;
+  }
 }
 </style>
