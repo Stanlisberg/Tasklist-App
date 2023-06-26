@@ -2,7 +2,7 @@
   <div ref="btnref1" class="container">
     <div class="wrapper">
       <div class="first-row">
-        <h1 @click='doThis' ref="paraRef" class="head">Task List</h1>
+        <h1 @click="doThis" ref="paraRef" class="head">Task List</h1>
         <button @click="displayUpdateModal"><span class="add">+</span> Add Task</button>
       </div>
       <div class="second-row">
@@ -47,7 +47,14 @@
                 <button @click="handleActiveButton(3)" :class="lowActive()">Low</button>
               </div>
               <div class="add-button-div">
-                <button @click="addTask" ref="addUpdateRef" :class="disableAdd()"  id='add-button-id'>Add</button>
+                <button
+                  @click="addTask"
+                  ref="addUpdateRef"
+                  :class="disableAdd()"
+                  id="add-button-id"
+                >
+                  Add
+                </button>
               </div>
             </div>
           </div>
@@ -75,30 +82,39 @@
               </div>
               <div class="update-third">
                 <p>Priority</p>
-                <button ref='handleButtonRef' @click="handleActiveButton(1)" :class="highActive()">High</button>
+                <button ref="handleButtonRef" @click="handleActiveButton(1)" :class="highActive()">
+                  High
+                </button>
                 <button @click="handleActiveButton(2)" :class="mediumActive()">Medium</button>
                 <button @click="handleActiveButton(3)" :class="lowActive()">Low</button>
               </div>
               <div class="add-button-div">
-                <button @click="editTask" ref="addUpdateRef" class="add-button" id='add-button-id'>Edit</button>
+                <button @click="editTask" ref="addUpdateRef" class="add-button" id="add-button-id">
+                  Edit
+                </button>
               </div>
             </div>
           </div>
 
-        <!-- <div class='hey'> -->
-         <div class='card-wrapper'>
-          <div class="first-col">
-            <p class="para-up">Task</p>
-            <p class="para-title">{{ task.title }}</p>
+          <!-- <div class='hey'> -->
+          <div class="card-wrapper">
+            <div class="first-col">
+              <p class="para-up">Task</p>
+              <p class="para-title">{{ task.title }}</p>
+            </div>
+            <div class="second-col">
+              <p class="para-up">Priority</p>
+              <p :class="handleLevel(task)">{{ task.level }}</p>
+            </div>
           </div>
-          <div class="second-col">
-            <p class="para-up">Priority</p>
-            <p :class='handleLevel(task)'>{{ task.level }}</p>
-          </div>
-         </div>
-        
 
-          <button ref="buttonRef" id='progress-button' :class='changeProgress(task)' @click="changeProgressButton(task.label)">{{ progressButton }}
+          <button
+            ref="buttonRef"
+            id="progress-button"
+            :class="changeProgress(task)"
+            @click="changeProgressButton(task.label)"
+          >
+            {{ progressButton }}
           </button>
           <font-awesome-icon
             icon="fa-regular fa-pen-to-square"
@@ -114,7 +130,6 @@
             @click="showDeleteModal(task)"
             class="logo logo2"
           />
-
         </div>
       </div>
     </div>
@@ -134,7 +149,7 @@ export default {
     const inputValue = ref()
     const editValue = ref()
     const addUpdateRef = ref()
-    const addRef= ref()
+    const addRef = ref()
     const removeRef = ref(false)
     const progressButton = ref()
     const handleButtonRef = ref()
@@ -142,12 +157,10 @@ export default {
     const buttonRef = ref(null)
     const buttonValue = ref()
 
-    
+    const myButton = buttonRef
 
-    const myButton = buttonRef;
-   
     const doThis = () => {
-      if(taskToEdit.value.level = 'High') {
+      if ((taskToEdit.value.level = 'High')) {
         console.log('hey')
       }
     }
@@ -160,7 +173,7 @@ export default {
       {
         title: 'Publish an article',
         level: 'Low',
-        id: '5', 
+        id: '5',
         label: ['To Do', 'In Progress', 'Done']
       }
     ])
@@ -242,7 +255,7 @@ export default {
         addRef.value = 'Low'
       }
 
-       newTask = {
+      newTask = {
         title: inputValue.value,
         level: addRef.value,
         id: generateUniqueId(),
@@ -289,40 +302,39 @@ export default {
 
     //---------Change Progress----------
     const changeProgress = (task) => {
-      progressButton.value = task.label[2] 
+      progressButton.value = task.label[2]
     }
 
     // buttonValue.value = 'To Do'
     const changeProgressButton = (task) => {
-     
-      const testing = task.filter(data => {
-        if(progressButton.value === 'To Do') {
-          return data === 'In Progress';
-        } else if(progressButton.value === 'In Progress') {
-           return data === 'Done'
-        } else if(progressButton.value === 'Done') {
-           return data === 'To Do'
-        }
-       }).map(item => {
-        // return item 
-        console.log(item)
-         return progressButton.value = item
-       })
+      const testing = task
+        .filter((data) => {
+          if (progressButton.value === 'To Do') {
+            return data === 'In Progress'
+          } else if (progressButton.value === 'In Progress') {
+            return data === 'Done'
+          } else if (progressButton.value === 'Done') {
+            return data === 'To Do'
+          }
+        })
+        .map((item) => {
+          // return item
+          console.log(item)
+          return (progressButton.value = item)
+        })
 
       //  console.log(progressButton.value)
-
     }
 
     //--------- Level Test cholor-----------
-    const handleLevel = (task)  => {
-        if(task.level === 'High') {
-          return 'high-red'
-        } else if(task.level === 'Medium') {
-          return 'medium-yellow'
-        } else if(task.level === 'Low') {
-          return 'low-green'
-        }
-
+    const handleLevel = (task) => {
+      if (task.level === 'High') {
+        return 'high-red'
+      } else if (task.level === 'Medium') {
+        return 'medium-yellow'
+      } else if (task.level === 'Low') {
+        return 'low-green'
+      }
     }
 
     return {
@@ -331,7 +343,7 @@ export default {
       handleButtonRef,
       paraRef,
       doThis,
-      buttonRef, 
+      buttonRef,
       buttonValue,
       // progressValue,
       changeProgress,
@@ -429,7 +441,7 @@ export default {
 
 .card-wrapper {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -448,7 +460,6 @@ export default {
 .high-red {
   color: #f73446;
   font-weight: 700;
- 
 }
 
 .medium-yellow {
@@ -481,7 +492,7 @@ button {
   }
 
   .card {
-    display:block;
+    display: block;
   }
 
   #progress-button {
@@ -489,11 +500,11 @@ button {
   }
 
   .logo2 {
-   margin-left: 8%;
+    margin-left: 8%;
   }
 
   .logo1 {
-     margin-left: 8%;
+    margin-left: 8%;
   }
 }
 
@@ -725,7 +736,7 @@ button {
   }
 
   #add-button-id {
-      width: 35%;
+    width: 35%;
   }
 }
 
