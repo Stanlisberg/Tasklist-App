@@ -3,7 +3,14 @@
     <div class="wrapper">
       <div class="first-row">
         <h1 @click="doThis" ref="paraRef" class="head">Task List</h1>
-        <button @click="displayUpdateModal"><span class="add">+</span> Add Task</button>
+        <button 
+          @click="displayUpdateModal">
+          <span class="add">
+            <font-awesome-icon 
+              icon="plus"
+            />
+          </span> Add Task
+        </button>
       </div>
       <div class="second-row">
         <div v-for="task in taskInfo" :key="task" class="card">
@@ -394,6 +401,7 @@ export default {
 .first-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .first-row .head {
@@ -403,7 +411,7 @@ export default {
 }
 
 .first-row button {
-  padding: 12px 27px;
+  padding: 12px 22px;
   margin: 20px 0;
   border-radius: 14px;
   font-size: 20px;
@@ -426,6 +434,14 @@ export default {
   .first-row button {
     padding: 10px 25px;
   }
+  .first-row button {
+  padding: 14px 16px;
+  margin: 20px 0;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
 }
 
 /*--------Card Section----------*/
@@ -451,6 +467,7 @@ export default {
 
 .para-up {
   color: #91929e;
+  font-size: 18px;
 }
 .para-title {
   width: 220px;
